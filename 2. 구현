@@ -1,0 +1,97 @@
+# 상하좌우
+
+# 내 코드
+n = int(input())
+move_type = ['L', 'R', 'U', 'D']
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
+plan = list(input().split())
+x = 1
+y = 1
+
+for move in plan:
+  if move == 'L':
+    index = 0
+  elif move == 'R':
+    index = 1
+  elif move == 'U':
+    index = 2
+  else:
+    index = 3
+   
+  if (x + dx[index] <= 0) or (x + dx[index] > n) or (y + dy[index] <= 0) or (y + dy[index] > n):
+      continue
+  x = x + dx[index]
+  y = y + dy[index] 
+
+print(x, y)
+
+# 답안 예시
+n = int(input())
+plans = input().split()
+x, y = 1, 1
+
+move_type = ['L', 'R', 'U', 'D']
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
+
+for plan in plans:
+    for i in range(len(move_type)):
+        if plan == move_type[i]:
+            nx = x + dx[i]
+            ny = y + dy[i]
+    if nx <1 or ny < 1 or nx > n or ny > n:
+        continue
+    x, y = nx, ny
+
+print(x, y)
+
+# 시각
+
+# 내 코드
+n = int(input())
+all = (n+1) * 60 * 60
+hour = 0
+
+if 0<= n <3:
+    hour = n+1
+elif 3<= n < 13:
+    hour = n
+elif 13<= n < 23:
+    hour = n-1
+else:
+    hour = n-2
+
+no_3 = hour*45*45
+
+number = all - no_3
+print(number)
+
+#답안 예시
+n = int(input())
+count = 0
+
+for i in range(n+1):
+  for j in range(60):
+    for k in range(60):
+      if '3' in str(i)+str(j)+str(k):
+        count += 1
+
+print(count)
+
+# 왕실의 나이트
+# 답안 예시
+pos = input()
+row = int(pos[1])
+column = int(ord(pos[0])) - int(ord('a')) + 1
+count = 0
+
+steps = [(-2,-1), (-2, 1), (2, 1), (2, -1), (-1, 2), (-1, -2), (1, 2), (1, -2)]
+
+for step in steps:
+  new_row = row + step[0]
+  new_column = column + step[1]
+  if new_row >=1 and new_row <=8 and new_column >= 1 and new_column <= 8:
+      count += 1
+
+print(count)
