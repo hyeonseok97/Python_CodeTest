@@ -1,1 +1,55 @@
+# DFS 예제
 
+def dfs(graph, v, visited):
+    visited[v] = True # 현재 시작노드를 방문처리
+    print(v, end=' ') # 탐색한 결과를 출력, 공백을 기준으로
+    for i in graph[v]: # 해당 노드의 인접노드 중 방문되지 않은 노드를 방문
+        if not visited[i]:
+            dfs(graph, i, visited)
+
+graph = [
+  [],
+  [2,3,8],
+  [1,7],
+  [1,4,5],
+  [3,5],
+  [3,4],
+  [7],
+  [2,6,8],
+  [1,7]
+]
+
+visited = [False]*9
+
+dfs(graph, 1, visited)
+
+# BFS 예제
+
+from collections import deque # 큐 자료구조를 구현하기위한 라이브러리의 함수 호출
+
+graph = [
+    [],
+    [2,3,8],
+    [1,7],
+    [1,4,5],
+    [3,5],
+    [3,4],
+    [7],
+    [2,6,8],
+    [1,7]
+]           # 그래프를 프로그래밍
+
+visited = [False]*9 # 방문 기록
+
+def bfs(graph, start, vistied): # BFS 함수 정의
+    queue = deque([start]) # 큐 객체 생성, 시작노드 추가
+    visited[start] = True # 시작노드 방문처리
+    while queue: # 큐가 비어질 때까지 반복
+        v = queue.popleft() # 큐에서 한 노드씩 뽑아냄
+        print(v, end=' ') # 큐에서 탐색한 순서대로 공백을 기준으로 출력
+        for i in graph[v]: # 시작노드와 인접노드 중 방문하지 않은 노드를 모두 큐에 넣고, 방문처리
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = True
+
+bfs(graph, 1, visited) # 시작노드를 1로 하는 함수
