@@ -1,0 +1,99 @@
+# 선택 정렬 예제
+
+array = [7,5,9,0,3,1,6,2,4,8] # 정렬해야하는 데이터
+
+for i in range(len(array)):
+    min_index=i # 가장 작은 원소가 들어갈 인덱스 변수
+    for j in range(i+1,len(array)):
+        if array[min_index] >= array[j]:
+            min_index=j # 나머지 데이터 중 가장 작은 데이터 인덱스를 해당 인덱스 변수에 할당
+    array[i], array[min_index] = array[min_index], array[i] # 스와프
+
+print(array)
+
+# 삽입 정렬 예제
+
+array = [7,5,9,0,3,1,6,2,4,8] # 정렬해야하는 데이터
+
+# 두 번째 데이터부터 시작
+for i in range(1,len(array)):
+    for j in range(i,0,-1): # 해당 데이터가 바로 왼쪽 데이터보다 작으면 스와프
+        if array[j] < array[j-1]:
+            array[j], array[j-1] = array[j-1], array[j]
+        else: # 해당 데이터보다 작은 데이터를 만나면 스톱
+            break
+
+print(array)
+
+# 퀵 정렬 예제
+
+# 정렬해야하는 데이터
+array = [5,7,9,0,3,1,6,2,4,8] 
+
+# 퀵 정렬 함수 정의
+def quick_sort(array, start, end):
+    if start >= end:  # 리스트의 원소가 1개 이하인 경우는 해당 리스트를 반환 --> 정렬 필요 X
+        return array
+    
+    # 피벗을 리스트의 첫 번째 원소로 설정
+    pivot = start
+    left = start + 1
+    right = end
+
+    # 왼쪽과 오른쪽이 엇갈릴 때 while문 탈출
+    while left <= right:
+        # 왼쪽에 해당하는 값이 피벗에 해당하는 값보다 클 때까지 반복
+        while left <= end and array[left] <= array[pivot]:
+            left += 1
+        # 오른쪽에 해당하는 값이 피벗에 해당하는 값보다 작을 때까지 반복    
+        while right > start and array[right] >= array[pivot]:
+            right -= 1
+        
+        # 왼쪽과 오른쪽이 엇갈리면 피벗과 작은 데이터를 스와프
+        if left > right:
+            array[right], array[pivot] = array[pivot], array[right]
+        else:
+            array[right], array[left] = array[left], array[right]
+    
+    # while 문을 탈출했다면 왼쪽과 오른쪽에 대해서 재귀적으로 함수 실행
+    quick_sort(array, start, right-1)
+    quick_sort(array, right+1, end)
+
+quick_sort(array, 0, len(array)-1)
+print(array)
+
+# 파이썬의 장점을 살린 퀵 정렬 코드
+
+# 정렬해야하는 데이터
+array = [5,7,9,0,3,1,6,2,4,8] 
+
+# 퀵 정렬 함수 정의
+def quick_sort(array):
+    if len(array) <= 1:  # 리스트의 원소가 1개 이하인 경우는 해당 리스트를 반환 --> 정렬 필요 X
+        return array
+    pivot = array[0]
+    tail = array[1:]
+
+    left = [x for x in tail if x <= pivot]
+    right = [x for x in tail if x > pivot]
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+
+print(quick_sort(array))
+
+# 계수 정렬
+
+# 정렬해야하는 데이터
+array = [7,5,9,0,3,1,6,2,9,1,4,8,0,5,2] 
+
+# 가장 작은 범위에서 가장 큰 범위까지 아우르는 크기의 리스트를 작성
+count_list = [0] * (max(array)+1)
+
+# 각각의 원소에 대한 인덱스의 값을 1씩 증가
+for i in array:
+    count_list[i] += 1
+
+# 인덱스의 값만큼 인덱스를 출력
+for i in range(len(count_list)):
+    for j in range(count_list[i]):
+        print(i, end=' ')
