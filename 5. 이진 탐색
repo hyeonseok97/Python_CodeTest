@@ -141,3 +141,28 @@ while True:
         break
 
 print(max)
+
+# 이진 탐색 방법
+
+# 떡의 개수 n, 요청한 떡의 길이 m을 공백으로 구분하여 입력
+n,m = map(int,input().split())
+
+# 떡의 개별 높이가 주어짐 
+length = list(map(int,input().split()))
+
+start = 0
+end = max(length)
+
+while start<=end:
+    total = 0
+    mid = (start+end) // 2
+    for i in length:
+      if (i-mid) >= 0:
+          total += (i-mid)
+    if total < m: # 떡의 양이 부족한 경우 mid를 줄임
+        end = mid - 1
+    else: # 떡의 양이 충분한 경우 mid를 늘림
+      result = mid
+      start = mid +1
+
+print(result)
