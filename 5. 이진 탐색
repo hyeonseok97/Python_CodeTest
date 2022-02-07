@@ -116,3 +116,28 @@ for target in order_array:
         print("yes", end=' ')
     else:
         print("no", end=' ')
+
+# 떡볶이 떡 만들기
+
+# 내 코드
+# 떡의 개수 n, 요청한 떡의 길이 m을 공백으로 구분하여 입력
+n,m = map(int,input().split())
+
+# 떡의 개별 높이가 주어짐 --> 오름차순으로 정렬
+length = list(map(int,input().split()))
+length.sort()
+
+max = 0
+
+while True:
+    total = 0
+    for i in length:
+      if (i-max) >= 0:
+        total += (i-max)
+    if total >= m:
+        max += 1
+    else:
+        max -= 1
+        break
+
+print(max)
