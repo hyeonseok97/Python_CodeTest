@@ -94,3 +94,25 @@ array = [1,2,3,3,3,3,4,4,8,9]
 
 print(count_by_range(array, 4, 4)) # 값이 4인 데이터의 개수
 print(count_by_range(array,-1,3)) # -1에서 3까지의 데이터의 개수
+
+# 부품 찾기
+
+import sys
+# 가게의 부품 갯수 n개 입력
+n = int(sys.stdin.readline().rstrip())
+
+# 각 부품의 번호를 공백으로 구분하여 n번 입력
+store_array = list(map(int,input().split()))
+
+# 주문한 부품 갯수 m개 입력
+m = int(sys.stdin.readline().rstrip())
+
+# 각 부품의 번호를 공백으로 구분하여 m번 입력
+order_array = list(map(int,input().split()))
+
+# 타겟은 주문한 부품의 번호, 가게의 부품 번호와 순차 탐색을 통해 있으면 yes, 없으면 no 출력
+for target in order_array:
+    if target in store_array:
+        print("yes", end=' ')
+    else:
+        print("no", end=' ')
