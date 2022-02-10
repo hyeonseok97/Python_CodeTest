@@ -1,0 +1,33 @@
+# 피보나치 함수 코드 --> n이 커질수록 시간복잡도가 기하급수적으로 증가 
+def fibo(x):
+    if x == 1 or x == 2:
+        return 1
+    return fibo(x-1) + fibo(x-2)
+
+print(fibo(4))
+
+# 피보나치 함수 코드(탑다운 방식, 메모이제이션을 이용)
+table = [0]*100 # 리스트 초기화
+
+def fibo(x):
+    if x == 1 or x == 2:
+        return 1
+    if table[x] != 0: # 한 번 구한 결과를 다시 계산하지 않고, 그대로 이용
+        return table[x]
+    table[x] = fibo(x-1) + fibo(x-2) # 구하지 않은 결과에 대해서만 점화식을 통한 재귀함수를 호출
+    return table[x]
+
+print(fibo(99))
+
+# 피보나치 함수 코드(보텀업방식)
+table = [0] *100 # 리스트 초기화
+
+# 초기값을 설정
+table[1] = 1
+table[2] = 1
+n = 99
+
+for i in range(3,n+1): # 반복문을 통해 작은 문제부터 차근차근 올라가는 방식
+    table[i] = table[i-1] + table[i-2]
+
+print(table[n])
