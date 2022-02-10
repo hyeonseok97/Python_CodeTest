@@ -31,3 +31,32 @@ for i in range(3,n+1): # 반복문을 통해 작은 문제부터 차근차근 �
     table[i] = table[i-1] + table[i-2]
 
 print(table[n])
+
+# 1로 만들기
+n = int(input()) # n을 입력받음
+
+d = [0] * 30001 # 결과를 저장하기 위한 테이블 초기화
+
+for i in range(2,n+1):
+    d[i] = d[i-1] + 1
+    if i % 2 == 0:
+        d[i] = min(d[i], d[i//2] + 1)
+    if i % 3 == 0:
+        d[i] = min(d[i], d[i//3] + 1)
+    if i % 5 == 0:
+        d[i] = min(d[i], d[i//5] + 1)
+
+print(d[n])
+
+# 개미전사
+n = int(input())
+
+array = list(map(int,input().split()))
+
+d = [0] * 100
+d[0] = array[0]
+d[1] = max(array[0], array[1])
+for i in range(2, n):
+    d[i] = max(d[i-1], d[i-2]+ array[i])
+
+print(d[n-1])
