@@ -62,7 +62,7 @@ start = int(input())
 graph = [[] for _ in range(n+1)] # 노드간의 관계를 나타내는 그래프
 distance = [INF] * (n+1) # 최단거리 테이블을 초기화
 
-for _ in range(n):
+for _ in range(m):
     a, b, c = map(int,input().split()) # a 노드에 b 노드까지의 거리 c
     graph[a].append((b,c)) # 그래프에 해당 노드의 인덱스에 (노드,거리) 형태로 할당
 
