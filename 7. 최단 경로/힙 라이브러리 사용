@@ -1,0 +1,31 @@
+# 최소 힙을 통해 리스트의 데이터를 오름차순으로 정렬
+
+import heapq
+
+def heapsort(array):
+    h=[]
+    result =[]
+    for value in array:
+        heapq.heappush(h,value)
+    for _ in range(len(h)):
+        result.append(heapq.heappop(h))
+    return result
+
+result = heapsort([1,2,4,5,7,6,3,9,8,0])
+print(result)
+
+# 최대 힙을 통해 리스트의 데이터를 내림차순으로 정렬
+
+import heapq
+
+def heapsort(array):
+    h = []
+    result = []
+    for value in array:
+        heapq.heappush(h,-value)
+    for _ in range(len(h)):
+        result.append(-heapq.heappop(h))
+    return result
+
+result = heapsort([1,2,4,5,3,6,7,8,9,0])
+print(result)
