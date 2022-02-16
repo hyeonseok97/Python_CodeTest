@@ -1,0 +1,32 @@
+def find_parant(parant, x): # find 연산 정의
+    if parant[x] != x: # 루트 노드가 아니라면 부모 노드 테이블의 값이 자기 자신의 값이 아니라면
+        return find_parant(parant,parant[x])
+    return x 
+
+def union_parant(parant,a,b): # union 연산 정의
+    a = find_parant(parant, a)
+    b = find_parant(parant, b)
+    if a < b:
+        parant[b] = a
+    else:
+        parant[a] = b
+
+v, e = map(int, input().split()) # 노드의 개수, 간선의 개수를 입력
+parant = [0] * (v+1) # 부모노드 테이블을 초기화
+
+for i in range(1, v+1):
+    parant[i] = i
+
+for i in range(e): # union 연산의 수 즉, 간선의 갯수만큼 수행
+    a, b = map(int, input().split())
+    union_parant(parant, a, b)
+
+print('각 원소가 속한 집합: ', end=' ') # 루트 노드 출력
+for i in range(1, v+1):
+    print(find_parant(parant, i), end=' ')
+
+print()
+
+print('부모 테이블: ', end=' ')
+for i in range(1, v+1): # 부모 노드 출력
+    print(parant[i], end=' ')
