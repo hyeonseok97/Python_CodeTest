@@ -1,0 +1,31 @@
+def find_parant(parant, x): 
+    if parant[x] != x:
+        parant[x] =  find_parant(parant, parant[x])
+    return parant[x]
+
+def union_parant(parant, a, b):
+    a = find_parant(parant, a)
+    b = find_parant(parant, b)
+    if a < b:
+        parant[b] = a
+    else:
+        parant[a] = b
+
+v, e = map(int, input().split())
+parant = [0] * (v+1)
+for i in range(1, v+1):
+    parant[i] = i
+
+for i in range(e):
+    a, b = map(int, input().split())
+    union_parant(parant, a, b)
+
+print('각 원소가 속한 집합: ', end=' ')
+for i in range(1, v+1):
+    print(find_parant(parant, i), end=' ')
+
+print()
+print('부모 테이블: ', end=' ')
+for i in range(1, v+1):
+    print(parant[i], end=' ')
+    
