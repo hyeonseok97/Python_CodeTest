@@ -1,1 +1,34 @@
-1
+def find_parent(parent, x): # 사이클 판독을 위한 find 연산
+    if parent[x] != x:
+         parent[x] = find_parent(parent, parent[x])
+    return parent[x]
+
+def union_parent(parent,a,b): # 하나의 집합으로 합치는 union 연산
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
+
+v, e = map(int, input().split()) # 노드의 개수, 간선의 개수
+parent = [0]*(v+1) # 부모노드 테이블
+edges = [] # 간선의 정보를 담을 리스트
+result = 0 # 신장 트리를 만드는 데 필요한 비용
+
+for i in range(1, v+1):
+    parent[i] = i
+
+for i in range(e):
+    a, b, cost = map(int, input().split())
+    edges.append((cost,a,b))
+
+edges.sort() # 비용을 기준으로 오름차순 정렬
+
+for edge in edges:
+    cost, a, b = edge
+    if find_parent(parent, a) != find_parent(parent, b):
+        union_parent(parent, a, b)
+        result += cost
+
+print(result)
