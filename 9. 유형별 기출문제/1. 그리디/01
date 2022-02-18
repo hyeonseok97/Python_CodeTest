@@ -9,8 +9,8 @@ result = [] # 공포도에 따라 모험가를 담을 리스트
 count = 0 # 그룹의 수
 
 for i in range(len(array)):
-    result.append(array[i])
-    if max(result) == len(result):
+    result.append(array[i]) # 공포도가 낮은 순으로 모험가 그룹에 포함시킴
+    if len(result) >= max(result): # 그룹의 가장 높은 공포도 보다 그룹의 길이(모험가의 수)가 크거나 같다면 그룹 형성 --> 그룹 수는 1 증가, 그룹 리스트 초기화
         result = []
         count += 1
 
