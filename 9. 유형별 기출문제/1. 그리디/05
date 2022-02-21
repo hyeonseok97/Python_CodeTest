@@ -1,0 +1,29 @@
+# 볼링공 고르기
+
+# 내 코드
+
+n,m = map(int, input().split()) # 볼링공의 갯수와 무게 입력
+array = list(map(int, input().split())) # 각 공의 무게를 리스트로
+count = 0 # 경우의 수
+
+for i in range(len(array)-1): # 순차 탐색 --> 앞에서부터 현재의 값과 다른 값인 경우에만 경우의 수를 1씩 증가
+    for j in range(i+1, len(array)):
+        if array[i] != array[j]:
+            count += 1
+
+print(count)
+
+# 답안 예시
+
+n,m = map(int, input().split())
+data = list(map(int, input().split()))
+count = 0
+array = [0] * 11
+
+for x in data: # 각 무게에 해당하는 볼링공의 갯수
+    array[x] += 1
+
+for i in range(1, m+1):
+    n -= array[i] # A가 선택할 수 있는 갯수
+    count += (array[i] * n) # B가 선택할 수 있는 갯수와 곱
+print(count)
