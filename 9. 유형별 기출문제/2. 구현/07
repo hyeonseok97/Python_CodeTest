@@ -1,0 +1,33 @@
+# 럭키 스트레이트
+
+# 내 코드
+score = input() # 점수를 입력
+a = len(score) // 2 # 점수를 반으로 나누는 기준 자리수
+left_sum, right_sum = 0 , 0  # 왼쪽, 오른쪽 합
+
+for i in range(a): # 왼쪽 합 계산
+    left_sum += int(score[i])
+
+for i in range(a, len(score)): # 오른쪽 합 계산
+    right_sum += int(score[i])
+
+if left_sum == right_sum:
+    print('LUCKY')
+else:
+    print('READY')
+    
+# 답안 예시
+score = input() # 점수를 입력
+a = len(score)
+summary = 0  # 왼쪽, 오른쪽 합
+
+for i in range(a//2): # 왼쪽 합 계산
+    summary += int(score[i])
+
+for i in range(a//2, a): # 오른쪽 합 계산
+    summary -= int(score[i])
+
+if summary == 0:
+    print('LUCKY')
+else:
+    print('READY')
