@@ -1,0 +1,38 @@
+# 문자열 재정렬
+
+# 내 코드
+string = input() # 문자열 입력
+result = [] # 알파벳인 경우 문자를 담을 리스트
+number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] # 문자가 숫자인지 확인하는 리스트
+summary = 0 # 숫자인 경우의 합을 더할 변수
+
+for i in range(len(string)):
+    if string[i] in number:
+        summary += int(string[i])
+    else:
+        result.append(string[i])
+
+result.sort() # 알파벳 문자 정렬
+if summary != 0: # 합이 0이 아닌 경우 리스트 마지막에 추가
+    result.append(str(summary))
+
+for i in range(len(result)):
+    print(result[i], end='')
+
+# 답안 예시
+string = input() # 문자열 입력
+result = [] # 알파벳인 경우 문자를 담을 리스트
+summary = 0 # 숫자인 경우의 합을 더할 변수
+
+for i in string:
+    if i.isalpha():
+        result.append(i)
+    else:
+        summary += int(i)
+    
+result.sort() # 알파벳 문자 정렬
+if summary != 0: # 합이 0이 아닌 경우 리스트 마지막에 추가
+    result.append(str(summary))
+
+for i in range(len(result)):
+    print(result[i], end='')
