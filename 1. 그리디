@@ -1,45 +1,27 @@
 #큰 수의 법칙
 
 # 내 코드
-n, m, k = map(int, input().split())
-number = list(map(int, input().split()))
+n, m, k = map(int, input().split()) # n개의 자연수를 m번 더해 최댓값 구하기, 단 k번만큼 반복 불가
+array = list(map(int,input().split())) # n개의 자연수에 대한 배열 생성
 
-maximum = max(number)
-
-if number.count(maximum) == 1:
-   maximum = max(number)
-   number.remove(maximum)
-   maximum_2 = max(number)
-else:
-   maximum = max(number)
-   maximum_2 = max(number)  
-
-m_org = m
-count = 0
+# 합계, 더한 횟수 변수 설정
 sum = 0
+count = 0
 
-for i in range(k):
-    sum += maximum
-    count += 1
-if m != count:
-    sum += maximum_2
-    count += 1
-m = m - count
+# 최대값 1개, 그 다음 최대값을 구하기
+max1 = max(array)
+array.remove(max1)
+max2 = max(array)
 
-while m_org != count:
-  if m <= k:
-      for i in range(m):
-          sum += maximum
-          count += 1
-      break
-  else:
-      for i in range(k):
-          sum += maximum
-          count += 1
-      sum += maximum_2
-      count += 1
-      m = m- k - 1
-        
+# 최대값 k번 더하기, 그 다음 최대값 더하기 -> k+1번
+for _ in range(m):
+  if count == k:
+      count = 0
+      sum += max2
+      continue
+  sum += max1
+  count += 1
+
 print(sum)
 
 # 답안 예시
@@ -70,22 +52,29 @@ print(sum)
 
 # 내 코드
 n, m = map(int, input().split())
-#card = [list(map(int,input().split())) for _ in range(n)]
 
-minimum_list = list()
+# 2차원 리스트를 초기화
+array = [[0]*m for _ in range(n)]
 
+# 2차원 리스트를 입력 받음
 for i in range(n):
-    card_i = list(map(int, input().split()))
-    min_i = min(card_i)
-    minimum_list.append(min_i)
+  array_input = list(map(int, input().split()))
+  for j in range(m):
+    array[i][j] = array_input[j]  
 
-maximum = max(minimum_list)
-print(maximum)
+#최솟값 변수
+minimum = 0
+
+# 리스트별 1개씩 최솟값을 비교 후 업데이트
+for i in range(n):
+  if minimum <= min(array[i]):
+    minimum = min(array[i])
+
+# 최대값 출력
+print(minimum)
 
 # 답안 예시
 n, m = map(int, input().split())
-#card = [list(map(int,input().split())) for _ in range(n)]
-
 result = 0
 
 for i in range(n):
@@ -97,23 +86,23 @@ print(result)
 
 # 1이 될 때까지
 
-# 내 코드
-n , k = map(int, input().split())
+# 내 코드 n을 k로 나눌 수 있으면, 나누기를 하고, 못하면 1을 빼라
+n, k = map(int, input().split())
 
 count = 0
 
 while True:
   if n % k == 0:
-      n = n/k
-      count += 1
+    count +=1
+    n = n // k
   else:
-      n -= 1
-      count += 1
-  
+    count +=1
+    n -=1
+    
   if n == 1:
     break
 
-print(count)  
+print(count)
 
 # 답안 코드
 n , k = map(int, input().split())
